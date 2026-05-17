@@ -40,7 +40,7 @@ public class UserAuthService(IUserRepository userRepository, IAuthService authSe
 
     public async Task<AuthResponseDto> LoginAsync(LoginDto loginDto)
     {
-        var user = await _userRepository.GetByEmailAsync(loginDto.Email.ToLower().Trim());
+        var user = await _userRepository.GetByUsernameAsync(loginDto.Username.ToLower().Trim());
 
         if (user is null || !_authService.VerifyPassword(loginDto.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Credenciales incorrectas.");
