@@ -23,6 +23,7 @@ public class UserAuthService(IUserRepository userRepository, IAuthService authSe
         var passwordHash = _authService.HashPassword(createDto.Password);
 
         var user = new User {
+            Name = createDto.Name.ToLower().Trim(),
             Username = createDto.Username.ToLower().Trim(),
             Email = createDto.Email.ToLower().Trim(),
             PasswordHash = passwordHash
@@ -54,6 +55,7 @@ public class UserAuthService(IUserRepository userRepository, IAuthService authSe
     private AuthResponseDto BuildAuthResponse(User user, string token) => new()
     {
         Token = token,
+        Name = user.Name,
         Username = user.Username,
         Email = user.Email,
         UserId = user.Id,
