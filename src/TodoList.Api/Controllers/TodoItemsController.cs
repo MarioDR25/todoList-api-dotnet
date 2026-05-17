@@ -13,10 +13,6 @@ public class TodoItemsController(ITodoItemService service) : ControllerBase
 {
     private readonly ITodoItemService _service = service;
 
-    /// <summary>
-    /// Lee el UserId del claim del token JWT.
-    /// El cliente nunca lo envía — viene firmado por el servidor.
-    /// </summary>
     private Guid GetUserIdFromToken() =>
         Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)
             ?? throw new UnauthorizedAccessException("Token inválido."));
